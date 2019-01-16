@@ -2,10 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Description>Provides extension methods over collections, cache, files, queryables and more.</Description>
+    <PackageLicenseUrl>https://github.com/msotiroff/MSToolKit/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/msotiroff/MSToolKit/tree/master/source/1.0/MSToolKit.Extensions</RepositoryUrl>
+    <RepositoryType>Public</RepositoryType>
+    <PackageReleaseNotes>Documentation - https://github.com/msotiroff/MSToolKit/blob/master/source/1.0/MSToolKit.Extensions/MSToolKit.Extensions_Documentation.xml</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\PROJECTS\C#.NET\MSToolKit\source\1.0\MSToolKit.Extensions\MSToolKit.Extensions.xml</DocumentationFile>
+    <DocumentationFile>D:\PROJECTS\C#.NET\MSToolKit\source\1.0\MSToolKit.Extensions\MSToolKit.Extensions_Documentation.xml</DocumentationFile>
     <OutputPath></OutputPath>
   </PropertyGroup>
 

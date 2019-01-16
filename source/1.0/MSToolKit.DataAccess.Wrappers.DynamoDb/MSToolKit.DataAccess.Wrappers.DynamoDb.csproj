@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Description>Wrapper for easy access Amazon DynamoDB.</Description>
+    <PackageLicenseUrl>https://github.com/msotiroff/MSToolKit/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/msotiroff/MSToolKit/tree/master/source/1.0/MSToolKit.DataAccess.Wrappers.DynamoDb</RepositoryUrl>
+    <RepositoryType>Public</RepositoryType>
+    <PackageReleaseNotes>Documentation - https://github.com/msotiroff/MSToolKit/blob/master/source/1.0/MSToolKit.DataAccess.Wrappers.DynamoDb/MSToolKit.DataAccess.Wrappers.DynamoDb_Documentation.xml</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
