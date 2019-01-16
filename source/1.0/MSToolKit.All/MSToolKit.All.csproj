@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Company>MS Apps</Company>
+    <Authors>Mihail Sotirov</Authors>
+    <Description></Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MSToolKit.Authentication\MSToolKit.Authentication.csproj" />
+    <ProjectReference Include="..\MSToolKit.Collections\MSToolKit.Collections.csproj" />
+    <ProjectReference Include="..\MSToolKit.DataAccess.Wrappers.DynamoDb\MSToolKit.DataAccess.Wrappers.DynamoDb.csproj" />
+    <ProjectReference Include="..\MSToolKit.DataAccess.Wrappers.MongoDb\MSToolKit.DataAccess.Wrappers.MongoDb.csproj" />
+    <ProjectReference Include="..\MSToolKit.DataAccess\MSToolKit.DataAccess.csproj" />
+    <ProjectReference Include="..\MSToolKit.EmailServices\MSToolKit.EmailServices.csproj" />
+    <ProjectReference Include="..\MSToolKit.Extensions\MSToolKit.Extensions.csproj" />
+    <ProjectReference Include="..\MSToolKit.Filters\MSToolKit.Filters.csproj" />
+    <ProjectReference Include="..\MSToolKit.IO.AmazonFileManagement\MSToolKit.IO.AmazonFileManagement.csproj" />
+    <ProjectReference Include="..\MSToolKit.IO.Excel\MSToolKit.IO.Excel.csproj" />
+    <ProjectReference Include="..\MSToolKit.IO\MSToolKit.IO.csproj" />
+    <ProjectReference Include="..\MSToolKit.Mapping\MSToolKit.Mapping.csproj" />
+    <ProjectReference Include="..\MSToolKit.Mvc\MSToolKit.Mvc.csproj" />
+    <ProjectReference Include="..\MSToolKit.Validation\MSToolKit.Validation.csproj" />
+  </ItemGroup>
+
+</Project>

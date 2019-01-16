@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MSToolKit.DataAccess\MSToolKit.DataAccess.csproj" />
+    <ProjectReference Include="..\MSToolKit.Extensions\MSToolKit.Extensions.csproj" />
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.14.17" />
+    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.6" />
+  </ItemGroup>
+
+</Project>
