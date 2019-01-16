@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MSToolKit.Filters</name>
+    </assembly>
+    <members>
+        <member name="T:MSToolKit.Filters.LoggingExceptionHandler">
+            <summary>
+            Provides functionality for exception handling.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Filters.LoggingExceptionHandler.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{MSToolKit.Filters.LoggingExceptionHandler},Microsoft.AspNetCore.Hosting.IHostingEnvironment,MSToolKit.Filters.Options.LoggingExceptionHandlerOptions)">
+            <summary>
+            Initializes a new instance of MSToolKit.Filters.LoggingExceptionHandler.
+            </summary>
+            <param name="next">The function that process the current HTTP request.</param>
+            <param name="logger">The instance for Microsoft.Extensions.Logging.ILogger, that will log the occured errors.</param>
+            <param name="hostingEnvironment">The current instance of Microsoft.AspNetCore.Hosting.IHostingEnvironment.</param>
+            <param name="options">
+            An instance of MSToolKit.Filters.Options.ExceptionHandlerOptions, 
+            that configures the behavior of the exception handler.
+            </param>
+        </member>
+        <member name="M:MSToolKit.Filters.LoggingExceptionHandler.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invokes the current request delegate and, 
+            if any exception has thrown, handle it and log the occured error.
+            After that rethrow the original exception or build a response, 
+            depending on the ExceptionHandlerOptions of the current instance.
+            </summary>
+            <param name="context">
+            The current instance of Microsoft.AspNetCore.Http.HttpContext, 
+            that encapsulates all HTTP-specific information about an individual HTTP request.
+            </param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="T:MSToolKit.Filters.Options.LoggingExceptionHandlerOptions">
+            <summary>
+            Specifies options for LoggingExceptionHandler requirements.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Filters.Options.LoggingExceptionHandlerOptions.LocalErrorUrl">
+            <summary>
+            Gets or sets the relative path to the local error url.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Filters.Options.LoggingExceptionHandlerOptions.ShouldRethrowException">
+            <summary>
+            Gets or sets a member, that indicates wether the original exception should be rethrown.
+            </summary>
+        </member>
+        <member name="T:MSToolKit.Filters.ValidateModelStateAttribute">
+            <summary>
+            Validates the ModelState and, if there are any errors, redirects to the GET method with its arguments or,
+            if does not find it, returns BadRequestResult.
+            </summary>
+        </member>
+        <member name="T:MSToolKit.Filters.ValidateQueryParametersAttribute">
+            <summary>
+            Validates that the query parameters, required for current action are not null, 
+            if there are any missing parameters returns BadRequestResult.
+            Optionally can be passed just part of the action arguments that should be validated. 
+            If no arguments specified - all the action arguments will be validated.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Filters.ValidateQueryParametersAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of MSToolKit.Filters.ValidateQueryParametersAttribute.
+            </summary>
+            <param name="actionArgumentsToValidate">
+            Action arguments that should be validated.
+            </param>
+        </member>
+    </members>
+</doc>

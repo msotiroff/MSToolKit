@@ -1,0 +1,898 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MSToolKit.Authentication</name>
+    </assembly>
+    <members>
+        <member name="T:MSToolKit.Authentication.Abstraction.IPasswordHasher">
+            <summary>
+            Provides an abstraction for hashing passwords.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IPasswordHasher.ComputeHash(System.String)">
+            <summary>
+            Returns hashed representation of the supplied password.
+            </summary>
+            <param name="input">The password in plain text.</param>
+            <returns>Hashed input.</returns>
+        </member>
+        <member name="T:MSToolKit.Authentication.Abstraction.IPasswordValidator">
+            <summary>
+            Provides an abstraction for validating passwords.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IPasswordValidator.Validate(System.String)">
+            <summary>
+            Validates the given password.
+            </summary>
+            <param name="password">The password in plain text.</param>
+            <returns>MSToolKit.Authentication.AuthenticationResult</returns>
+        </member>
+        <member name="T:MSToolKit.Authentication.Abstraction.ISignInManager`1">
+            <summary>
+            Provides an abstraction for user sign in.
+            </summary>
+            <typeparam name="TUser">The type encapsulating a user.</typeparam>
+        </member>
+        <member name="P:MSToolKit.Authentication.Abstraction.ISignInManager`1.RequireConfirmedEmail">
+            <summary>
+            Returns true or false depending on whether it is mandatory for 
+            the user to confirm his/her email, in order to sign in.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.ISignInManager`1.SignInAsync(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String,System.Boolean)">
+            <summary>
+            Signs the user with specified email and password.
+            </summary>
+            <param name="httpContext">Microsoft.AspNetCore.Http.HttpContext.</param>
+            <param name="email">Email address.</param>
+            <param name="passwordHash">Hashed representation of the user's password.</param>
+            <param name="isPersistent">Indicates wether the user session should be persistent(Default value: false).</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.ISignInManager`1.SignOutAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Signs the current user out of the application.
+            </summary>
+            <param name="httpContext">Microsoft.AspNetCore.Http.HttpContext.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="T:MSToolKit.Authentication.Abstraction.IUserManager`1">
+            <summary>
+            Provides an abstraction for managing the user.
+            </summary>
+            <typeparam name="TUser">The type encapsulating a user.</typeparam>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.AddToRoleAdminAsync(`0)">
+            <summary>
+            Adds the specified user to Administrator role.
+            </summary>
+            <param name="user">The user to be added to administrator role.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.ChangePasswordAsync(`0,System.String,System.String)">
+            <summary>
+            Changes a user's password after confirming the specified 
+            currentPassword is correct, as an asynchronous operation.
+            </summary>
+            <param name="user">The user whose password should be set.</param>
+            <param name="currentPassword">The current password to validate before changing.</param>
+            <param name="newPassword">The new password to set for the specified user.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.CheckPasswordAsync(System.String,System.String)">
+            <summary>
+            Checks the user's credentials against email and password, as an asynchronous operation.
+            If the user is marked as deleted and credentials are valid - unmarks it.
+            </summary>
+            <param name="email">The user's email address.</param>
+            <param name="password">The user's password in plain text.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, containing the TUser.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.ConfirmEmailAsync(System.String,System.String)">
+            <summary>
+            Validates that an email confirmation token matches the specified user.
+            </summary>
+            <param name="userId">The user's unique id to validate the token against.</param>
+            <param name="token">The email confirmation token to validate.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.CreateAsync(`0)">
+            <summary>
+            Creates the specified user in the backing store, as an asynchronous operation.
+            </summary>
+            <param name="user">The user to create.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.DeleteAsync(`0)">
+            <summary>
+            Marks the specified user as deleted in the backing store, as an asynchronous operation.
+            </summary>
+            <param name="user">The user to be deleted.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.GenerateEmailConfirmationTokenAsync(`0)">
+            <summary>
+            Generates an email confirmation token for the specified user.
+            </summary>
+            <param name="user">The user to generate an email confirmation token for.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing string representation of the generated token.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.GenerateResetPasswordConfirmationTokenAsync(`0)">
+            <summary>
+            Generates a password confirmation token for the specified user.
+            </summary>
+            <param name="user">The user to generate an email confirmation token for.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing string representation of the generated token.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.GetPasswordHash(System.String)">
+            <summary>
+            Generates a hash representation of specified password.
+            </summary>
+            <param name="password">The password to generate hash for.</param>
+            <returns>
+            The generated hash representation of the input.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.FindByEmailAsync(System.String)">
+            <summary>
+            Gets the user, if any, associated with the value of the specified email address.
+            </summary>
+            <param name="email">The email address to return the user for.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, containing the TUser.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.FindByIdAsync(System.String)">
+            <summary>
+            Gets the user, if any, associated with the value of the specified unique id.
+            </summary>
+            <param name="userId">The user's id to return the user for.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, containing the TUser.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.RemoveFromRoleAdminAsync(`0)">
+            <summary>
+            Remove the specified user from Administrator role.
+            </summary>
+            <param name="user">The user to remove from administrator role.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.UpdateAsync(`0)">
+            <summary>
+            Updates the specified user in the user store.
+            </summary>
+            <param name="user">The user that should be updated.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.ValidatePassword(System.String)">
+            <summary>
+            Should return MSToolKit.Authentication.AuthenticationResult.Success if validation is successful.
+            This is called before updating the password hash.
+            </summary>
+            <param name="password">The password that should be validated.</param>
+            <returns>
+            MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.SetPasswordAsync(System.String,System.String)">
+            <summary>
+            Sets a user's password as an asynchronous operation.
+            </summary>
+            <param name="id">The user identifier, whoch user's password should be set.</param>
+            <param name="newPassword">The new password to set for the specified user.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserManager`1.ConfirmResetPasswordTokenAsync(System.String,System.String)">
+            <summary>
+            Validates that the password confirmation token matches the specified user.
+            </summary>
+            <param name="userId">The user's unique id to validate the token against.</param>
+            <param name="token">The password confirmation token to validate.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="T:MSToolKit.Authentication.Abstraction.IUserStore`1">
+            <summary>
+            Provides an abstraction for a store which manages user accounts.
+            </summary>
+            <typeparam name="TUser">
+            The type encapsulating a user.
+            </typeparam>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserStore`1.DeleteAsync(`0)">
+            <summary>
+            Deletes the specified user from the user store.
+            </summary>
+            <param name="user">The user to be deleted.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserStore`1.FindByIdAsync(System.String)">
+            <summary>
+            Finds and returns a user, if any, who has the specified unique id.
+            </summary>
+            <param name="id">The user Id to search for.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the user matching the specified userId if it exists.
+            </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:MSToolKit.Authentication.Abstraction.IUserStore`1.FilterAsync(System.String,System.Object)" -->
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserStore`1.FilterAsync(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Finds and returns users, if any, who matches key-value pairs, containing the specified members with the specified values.
+            </summary>
+            <param name="matchCollection">
+            A collection of key-value pairs, 
+            representing the search member as key and the search term as value.
+            </param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation,
+            containing a collection of users, that match the given conditions.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserStore`1.SaveAsync(`0)">
+            <summary>
+            Creates (if not exists) or Updates (if exists) the specified user in the user store.
+            </summary>
+            <param name="user">The user to be created/updated.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation
+            </returns>
+        </member>
+        <member name="T:MSToolKit.Authentication.Abstraction.IUserValidator`1">
+            <summary>
+            Provides an abstraction for user validation.
+            </summary>
+            <typeparam name="TUser">The type encapsulating a user.</typeparam>
+        </member>
+        <member name="M:MSToolKit.Authentication.Abstraction.IUserValidator`1.ValidateAsync(`0)">
+            <summary>
+            Validates the specified user as an asynchronous operation.
+            </summary>
+            <param name="user">The user to validate.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="T:MSToolKit.Authentication.AuthenticationConstants">
+            <summary>
+            A class, that contains all constants, needed for the authentication process.
+            </summary>
+        </member>
+        <member name="F:MSToolKit.Authentication.AuthenticationConstants.ClaimTypeIdentifier">
+            <summary>
+            Returns the claim type for authentication ID.
+            </summary>
+        </member>
+        <member name="F:MSToolKit.Authentication.AuthenticationConstants.AdministratorRoleName">
+            <summary>
+            Returns the administrator user's role name.
+            </summary>
+        </member>
+        <member name="F:MSToolKit.Authentication.AuthenticationConstants.RegularRoleName">
+            <summary>
+            Returns the regular user's role name.
+            </summary>
+        </member>
+        <member name="T:MSToolKit.Authentication.AuthenticationResult">
+            <summary>
+            Represents the result of an authentication operation.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Authentication.AuthenticationResult.#ctor(System.Boolean,System.String)">
+            <summary>
+            Initializes a new instance of MSToolKit.Authentication.AuthenticationResult.
+            </summary>
+            <param name="success">Wether the result is successfull or not.</param>
+            <param name="responseMessage">The response message for the instance.</param>
+        </member>
+        <member name="P:MSToolKit.Authentication.AuthenticationResult.Success">
+            <summary>
+            Member indicating whether if the operation succeeded or not.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.AuthenticationResult.ResponseMessage">
+            <summary>
+            Member that contains a message that describes the result of the authentication operation.
+            </summary>
+        </member>
+        <member name="T:MSToolKit.Authentication.AuthenticationUser">
+            <summary>
+            The default implementation of MSToolKit.Authentication.AuthenticationUser, which uses a string as a primary key.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Authentication.AuthenticationUser.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of MSToolKit.Authentication.AuthenticationUser.
+            The Id property is initialized to form a new GUID string value.
+            </summary>
+            <param name="email">The specified user's email.</param>
+            <param name="passwordHash">The hash representation of the user's password.</param>
+        </member>
+        <member name="M:MSToolKit.Authentication.AuthenticationUser.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of MSToolKit.Authentication.AuthenticationUser.
+            The Id property is initialized to form a new GUID string value.
+            </summary>
+            <param name="email">The specified user's email.</param>
+            <param name="username">The specified user's username.</param>
+            <param name="passwordHash">The hash representation of the user's password.</param>
+        </member>
+        <member name="M:MSToolKit.Authentication.AuthenticationUser.#ctor">
+            <summary>
+            Initializes a new instance of MSToolKit.Authentication.AuthenticationUser.
+            The Id property is initialized to form a new GUID string value.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.AuthenticationUser.Id">
+            <summary>
+            Gets or sets the primary key for this user.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.AuthenticationUser.Email">
+            <summary>
+            Gets or sets the email address for this user.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.AuthenticationUser.Username">
+            <summary>
+            Gets or sets the username for this user.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.AuthenticationUser.PasswordHash">
+            <summary>
+            Gets or sets the hash representation of this user's password.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.AuthenticationUser.EmailConfirmed">
+            <summary>
+            Gets or sets the member, that indicates wether the user's email is confirmed ot not.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.AuthenticationUser.IsAdmin">
+            <summary>
+            Gets or sets the member, that indicates wether the user has administrator control ot not.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.AuthenticationUser.IsDeleted">
+            <summary>
+            Gets or sets the member, that indicates wether the user is marked as deleted ot not.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.AuthenticationUser.EmailConfirmationToken">
+            <summary>
+            Gets or sets the email confirmation token for this user.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.AuthenticationUser.ResetPasswordConfirmationToken">
+            <summary>
+            Gets or sets the reset password confirmation token for this user.
+            </summary>
+        </member>
+        <member name="T:MSToolKit.Authentication.Extensions.ClaimsPrincipalExtensions">
+            <summary>
+            Provides extension methods for using over System.Security.Claims.ClaimsPrincipal class.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Authentication.Extensions.ClaimsPrincipalExtensions.GetIdentifier(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Returns the string representation of the unique identifier for the current ClaimsPrincipal.
+            </summary>
+            <param name="claimsPrincipal">Current System.Security.Claims.ClaimsPrincipal instance</param>
+            <returns>
+            The string representation of the unique identifier for the current ClaimsPrincipal.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Extensions.ClaimsPrincipalExtensions.GetEmail(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Returns the email for the current ClaimsPrincipal.
+            </summary>
+            <param name="claimsPrincipal">Current System.Security.Claims.ClaimsPrincipal instance</param>
+            <returns>
+            The email for the current ClaimsPrincipal.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Extensions.DependencyInjection.ServiceCollectionExtensions.AddAuthenticationServices``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{MSToolKit.Authentication.Options.AuthenticationOptions})">
+            <summary>
+            Adds authentication services with specified(or default, if missing) options to the service provider.
+            </summary>
+            <typeparam name="TUser">The type encapsulating a user.</typeparam>
+            <param name="services">The service collection, that will service provider be built from.</param>
+            <param name="options">Instance of MSToolKit.Authentication.Options.AuthenticationOptions(optional parameter).</param>
+            <returns>
+            The same instane of Microsoft.Extensions.DependencyInjection.IServiceCollection with filled authentication services.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.Extensions.DependencyInjection.ServiceCollectionExtensions.AddUserStore``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds a specified user store to the service provider. Only one user store per user type is allowed.
+            </summary>
+            <typeparam name="TUser">The type encapsulating a user.</typeparam>
+            <typeparam name="TStore">The type encapsulating a user store.</typeparam>
+            <param name="services">The service collection, that will service provider be built from.</param>
+            <exception cref="T:System.InvalidOperationException">
+            System.InvalidOperationException will be thrown, if method's already invoked with the same type of TUser.
+            </exception>
+            <returns>
+            The same instane of Microsoft.Extensions.DependencyInjection.IServiceCollection with filled user store services.
+            </returns>
+        </member>
+        <member name="T:MSToolKit.Authentication.Options.AuthenticationOptions">
+            <summary>
+            Represents all the options you can use to configure the authentication system.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.Options.AuthenticationOptions.User">
+            <summary>
+            Gets or sets the UserOptions for the authentication system.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.Options.AuthenticationOptions.Password">
+            <summary>
+            Gets or sets the PasswordOptions for the authentication system.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.Options.AuthenticationOptions.SignIn">
+            <summary>
+            Gets or sets the SignInOptions for the authentication system.
+            </summary>
+        </member>
+        <member name="T:MSToolKit.Authentication.Options.PasswordOptions">
+            <summary>
+            Specifies options for password requirements.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.Options.PasswordOptions.RequiredLength">
+            <summary>
+            Gets or sets the minimum length a password must be. Defaults to 4.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.Options.PasswordOptions.RequiredUniqueChars">
+            <summary>
+            Gets or sets the minimum number of unique chars a password must comprised of. Defaults to 1.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.Options.PasswordOptions.RequireNonAlphanumeric">
+            <summary>
+            Gets or sets a member indicating if passwords must contain a non-alphanumeric character. Defaults to false.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.Options.PasswordOptions.RequireLowercase">
+            <summary>
+            Gets or sets a member indicating if passwords must contain a lower case ASCII character. Defaults to false.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.Options.PasswordOptions.RequireUppercase">
+            <summary>
+            Gets or sets a member indicating if passwords must contain an upper case ASCII character. Defaults to false.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.Options.PasswordOptions.RequireDigit">
+            <summary>
+            Gets or sets a member indicating if passwords must contain a digit. Defaults to false.
+            </summary>
+        </member>
+        <member name="T:MSToolKit.Authentication.Options.SignInOptions">
+            <summary>
+            Options for configuring sign in.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.Options.SignInOptions.RequireConfirmedEmail">
+            <summary>
+            Gets or sets a member indicating whether a confirmed email address is required to sign in. Defaults to false.
+            </summary>
+        </member>
+        <member name="T:MSToolKit.Authentication.Options.UserOptions">
+            <summary>
+            Options for user validation.
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.Options.UserOptions.AllowedUserNameCharacters">
+            <summary>
+            Gets or sets the list of allowed characters in the username used to validate user names. 
+            Defaults to @.-_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+            </summary>
+        </member>
+        <member name="P:MSToolKit.Authentication.Options.UserOptions.RequireUniqueEmail">
+            <summary>
+            Gets a member indicating whether the application requires unique emails for its users. Always true.
+            </summary>
+        </member>
+        <member name="T:MSToolKit.Authentication.PasswordHasher">
+            <summary>
+            Provides a default implementation for MSToolKit.Authentication.Abstraction.IPasswordHasher.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Authentication.PasswordHasher.ComputeHash(System.String)">
+            <summary>
+            Returns hashed representation of the supplied password.
+            </summary>
+            <param name="input">The password in plain text.</param>
+            <returns>Hashed input.</returns>
+        </member>
+        <member name="T:MSToolKit.Authentication.PasswordValidator">
+            <summary>
+            Provides a default implementation for MSToolKit.Authentication.Abstraction.IPasswordValidator.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Authentication.PasswordValidator.#ctor(MSToolKit.Authentication.Options.AuthenticationOptions)">
+            <summary>
+            Initialize a new instance of MSToolKit.Authentication.PasswordValidator.
+            </summary>
+            <param name="authenticationOptions">
+            MSToolKit.Authentication.Options.AuthenticationOptions, that configures the behavior of the current instance.
+            </param>
+        </member>
+        <member name="M:MSToolKit.Authentication.PasswordValidator.Validate(System.String)">
+            <summary>
+            Validates the given password.
+            </summary>
+            <param name="password">The password (in plain text), that should be validated.</param>
+            <returns>
+            MSToolKit.Authentication.AuthenticationResult
+            </returns>
+        </member>
+        <member name="T:MSToolKit.Authentication.SignInManager`1">
+            <summary>
+            Provides a default implementattion for MSToolKit.Authentication.Abstraction.ISignInManager
+            </summary>
+            <typeparam name="TUser">The type encapsulating a user.</typeparam>
+        </member>
+        <member name="M:MSToolKit.Authentication.SignInManager`1.#ctor(MSToolKit.Authentication.Abstraction.IUserManager{`0},MSToolKit.Authentication.Options.SignInOptions)">
+            <summary>
+            Initialize a new instance of MSToolKit.Authentication.SignInManager
+            </summary>
+            <param name="userManager">
+            An instance for MSToolKit.Authentication.Abstraction.IUserManager.
+            </param>
+            <param name="signInOptions">
+            MSToolKit.Authentication.Options.AuthenticationOptions,
+            that configures the behavior of the current instance.
+            </param>
+        </member>
+        <member name="P:MSToolKit.Authentication.SignInManager`1.RequireConfirmedEmail">
+            <summary>
+            Gets the member, that indicates wether the email confirmation is required for the user in order to sign in. Default value: false.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Authentication.SignInManager`1.SignInAsync(Microsoft.AspNetCore.Http.HttpContext,System.String,System.String,System.Boolean)">
+            <summary>
+            Signs the user with specified email and password.
+            </summary>
+            <param name="httpContext">Microsoft.AspNetCore.Http.HttpContext.</param>
+            <param name="email">Email address.</param>
+            <param name="passwordHash">Hashed representation of the user's password.</param>
+            <param name="isPersistent">Indicates wether the user session should be persistent(Default value: false).</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.SignInManager`1.SignOutAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Signs the current user out of the application.
+            </summary>
+            <param name="httpContext">Microsoft.AspNetCore.Http.HttpContext.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="T:MSToolKit.Authentication.UserManager`1">
+            <summary>
+            Provides a default implementation for MSToolKit.Authentication.Abstraction.IUserManager.
+            </summary>
+            <typeparam name="TUser">The type encapsulating a user.</typeparam>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.#ctor(MSToolKit.Authentication.Abstraction.IUserStore{`0},MSToolKit.Authentication.Abstraction.IUserValidator{`0},MSToolKit.Authentication.Abstraction.IPasswordHasher,MSToolKit.Authentication.Abstraction.IPasswordValidator,MSToolKit.Authentication.Options.UserOptions)">
+            <summary>
+            Initialize a new instance for MSToolKit.Authentication.UserManager.
+            </summary>
+            <param name="userStore">
+            An instance for MSToolKit.Authentication.Abstraction.IUserStore.
+            </param>
+            <param name="userValidator">
+            An instance for MSToolKit.Authentication.Abstraction.IUserValidator.
+            </param>
+            <param name="passwordHasher">
+            An instance for MSToolKit.Authentication.Abstraction.IPasswordHasher.
+            </param>
+            <param name="passwordValidator">
+            An instance for MSToolKit.Authentication.Abstraction.IPasswordValidator.
+            </param>
+            <param name="userOptions">
+            MSToolKit.Authentication.Options.AuthenticationOptions,
+            that configures the behavior of the current instance.
+            </param>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.AddToRoleAdminAsync(`0)">
+            <summary>
+            Adds the specified user to Administrator role.
+            </summary>
+            <param name="user">The user to be added to administrator role.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.ChangePasswordAsync(`0,System.String,System.String)">
+            <summary>
+            Changes a user's password after confirming the specified 
+            currentPassword is correct, as an asynchronous operation.
+            </summary>
+            <param name="user">The user whose password should be set.</param>
+            <param name="currentPassword">The current password to validate before changing.</param>
+            <param name="newPassword">The new password to set for the specified user.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.CheckPasswordAsync(System.String,System.String)">
+            <summary>
+            Checks the user's credentials against email and password, as an asynchronous operation.
+            If the user is marked as deleted and credentials are valid - unmarks it.
+            </summary>
+            <param name="email">The user's email address.</param>
+            <param name="password">The user's password in plain text.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, containing the TUser.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.ConfirmEmailAsync(System.String,System.String)">
+            <summary>
+            Validates that an email confirmation token matches the specified user.
+            </summary>
+            <param name="userId">The user's unique id to validate the token against.</param>
+            <param name="token">The email confirmation token to validate.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.CreateAsync(`0)">
+            <summary>
+            Creates the specified user in the backing store, as an asynchronous operation.
+            </summary>
+            <param name="user">The user to create.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.DeleteAsync(`0)">
+            <summary>
+            Marks the specified user as deleted in the backing store, as an asynchronous operation.
+            </summary>
+            <param name="user">The user to be deleted.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.FindByIdAsync(System.String)">
+            <summary>
+            Gets the user, if any, associated with the value of the specified unique id.
+            </summary>
+            <param name="userId">The user's id to return the user for.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, containing the TUser.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.GenerateEmailConfirmationTokenAsync(`0)">
+            <summary>
+            Generates an email confirmation token for the specified user.
+            </summary>
+            <param name="user">The user to generate an email confirmation token for.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing string representation of the generated token.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.FindByEmailAsync(System.String)">
+            <summary>
+            Gets the user, if any, associated with the value of the specified email address.
+            </summary>
+            <param name="email">The email address to return the user for.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, containing the TUser.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.GetPasswordHash(System.String)">
+            <summary>
+            Generates a hash representation of specified password.
+            </summary>
+            <param name="password">The password to generate hash for.</param>
+            <returns>
+            The generated hash representation of the input.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.RemoveFromRoleAdminAsync(`0)">
+            <summary>
+            Remove the specified user from Administrator role.
+            </summary>
+            <param name="user">The user to remove from administrator role.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.UpdateAsync(`0)">
+            <summary>
+            Updates the specified user in the user store.
+            </summary>
+            <param name="updatedUser">The user that should be updated.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.ValidatePassword(System.String)">
+            <summary>
+            Should return MSToolKit.Authentication.AuthenticationResult.Success if validation is successful.
+            This is called before updating the password hash.
+            </summary>
+            <param name="password">The password that should be validated.</param>
+            <returns>
+            MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.GenerateResetPasswordConfirmationTokenAsync(`0)">
+            <summary>
+            Generates a password confirmation token for the specified user.
+            </summary>
+            <param name="user">The user to generate an email confirmation token for.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing string representation of the generated token.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.SetPasswordAsync(System.String,System.String)">
+            <summary>
+            Sets a user's password as an asynchronous operation.
+            </summary>
+            <param name="id">The user identifier, whoch user's password should be set.</param>
+            <param name="newPassword">The new password to set for the specified user.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserManager`1.ConfirmResetPasswordTokenAsync(System.String,System.String)">
+            <summary>
+            Validates that the password confirmation token matches the specified user.
+            </summary>
+            <param name="userId">The user's unique id to validate the token against.</param>
+            <param name="token">The password confirmation token to validate.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+        <member name="T:MSToolKit.Authentication.UserStore`1">
+            <summary>
+            Provides a default implementation for MSToolKit.Authentication.Abstraction.IUserStore.
+            </summary>
+            <typeparam name="TUser">The type encapsulating a user.</typeparam>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserStore`1.#ctor(MSToolKit.DataAccess.Abstraction.IDbContext{`0,System.String})">
+            <summary>
+            Initialize a new instance for MSToolKit.Authentication.UserStore.
+            </summary>
+            <param name="dbContext">
+            An instance for MSToolKit.DataAccess.Abstraction.IDbContext
+            </param>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserStore`1.DeleteAsync(`0)">
+            <summary>
+            Marks the specified user as deleted.
+            </summary>
+            <param name="user">The user to be marked as deleted.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation.
+            </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:MSToolKit.Authentication.UserStore`1.FilterAsync(System.String,System.Object)" -->
+        <member name="M:MSToolKit.Authentication.UserStore`1.FilterAsync(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Finds and returns users, if any, who matches key-value pairs, containing the specified members with the specified values.
+            </summary>
+            <param name="matchCollection">
+            A collection of key-value pairs, 
+            representing the search member as key and the search term as value.
+            </param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation,
+            containing a collection of users, that match the given conditions.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserStore`1.FindByIdAsync(System.String)">
+            <summary>
+            Finds and returns a user, if any, who has the specified unique id.
+            </summary>
+            <param name="id">The user Id to search for.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation, 
+            containing the user matching the specified userId if it exists.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserStore`1.SaveAsync(`0)">
+            <summary>
+            Creates (if not exists) or Updates (if exists) the specified user in the user store.
+            </summary>
+            <param name="user">The user to be created/updated.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation
+            </returns>
+        </member>
+        <member name="T:MSToolKit.Authentication.UserValidator`1">
+            <summary>
+            Provides a default instance for MSToolKit.Authentication.Abstraction.IUserValidator.
+            </summary>
+            <typeparam name="TUser">The type encapsulating a user.</typeparam>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserValidator`1.#ctor(MSToolKit.Authentication.Options.UserOptions)">
+            <summary>
+            Initialize a new instance of MSToolKit.Authentication.UserValidator.
+            </summary>
+            <param name="userOptions">
+            MSToolKit.Authentication.Options.AuthenticationOptions, 
+            that configures the behavior of the current instance.
+            </param>
+        </member>
+        <member name="M:MSToolKit.Authentication.UserValidator`1.ValidateAsync(`0)">
+            <summary>
+            Validates the given user against its attributes and 
+            the AuthenticationOptions, specified in the current instance dependencies.
+            </summary>
+            <param name="user">The user to be validated.</param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation,
+            containing MSToolKit.Authentication.AuthenticationResult of the operation.
+            </returns>
+        </member>
+    </members>
+</doc>

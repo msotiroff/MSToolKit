@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MSToolKit.IO.AmazonFileManagement</name>
+    </assembly>
+    <members>
+        <member name="T:MSToolKit.IO.AmazonFileManagment.Abstraction.IAmazonS3FileManager">
+            <summary>
+            Provides an abstraction for CRUD operations over Amazon S3 bucket files.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.IO.AmazonFileManagment.Abstraction.IAmazonS3FileManager.GetFileBytesAsync(System.String,System.String)">
+            <summary>
+            Returns the specified file bytes.
+            </summary>
+            <param name="bucketName">
+            The bucket that should contain the file specified.
+            </param>
+            <param name="keyName">
+            The file key name.
+            </param>
+            <returns>
+            Byte array, containing the specified file's bytes.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.IO.AmazonFileManagment.Abstraction.IAmazonS3FileManager.UploadFileAsync(System.String,System.IO.Stream,System.String,Amazon.S3.S3CannedACL)">
+            <summary>
+            Uploads a file to a specified S3 bucket with specified key name.
+            </summary>
+            <param name="bucketName">
+            The bucket that should be the file uploaded to.
+            </param>
+            <param name="fileStream">
+            The stream that contains the file bytes.
+            </param>
+            <param name="keyName">
+            The uploded file key name.
+            </param>
+            <param name="s3CannedACL">
+            Instance of Amazon.S3.S3CannedACL that specifies the uploaded file access.
+            </param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation,
+            containing the public url of the uploaded file.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.IO.AmazonFileManagment.Abstraction.IAmazonS3FileManager.RemoveFileByUrlAsync(System.String,System.String)">
+            <summary>
+            Removes a specified file from an Amazon S3 bucket.
+            </summary>
+            <param name="bucketName">
+            The bucket that should be the file removed from.
+            </param>
+            <param name="fileUrl">
+            The url of the file that should be removed.
+            </param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.IO.AmazonFileManagment.Abstraction.IAmazonS3FileManager.RemoveFileAsync(System.String,System.String)">
+            <summary>
+            Removes a specified file from an Amazon S3 bucket.
+            </summary>
+            <param name="bucketName">
+            The bucket that should be the file removed from.
+            </param>
+            <param name="keyName">
+            The url of the file that should be removed.
+            </param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.IO.AmazonFileManagment.AmazonS3FileManager.#ctor(Amazon.S3.IAmazonS3,Amazon.S3.Transfer.ITransferUtility)">
+            <summary>
+            Initializes a new instance of MSToolKit.IO.AmazonFileManagment.AmazonS3FileManager.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.IO.AmazonFileManagment.AmazonS3FileManager.UploadFileAsync(System.String,System.IO.Stream,System.String,Amazon.S3.S3CannedACL)">
+            <summary>
+            Uploads a file to a specified S3 bucket with specified key name.
+            </summary>
+            <param name="bucketName">
+            The bucket that should be the file uploaded to.
+            </param>
+            <param name="fileStream">
+            The stream that contains the file bytes.
+            </param>
+            <param name="keyName">
+            The uploded file key name.
+            </param>
+            <param name="s3CannedACL">
+            Instance of Amazon.S3.S3CannedACL that specifies the uploaded file access.
+            </param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation,
+            containing the public url of the uploaded file.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.IO.AmazonFileManagment.AmazonS3FileManager.GetFileBytesAsync(System.String,System.String)">
+            <summary>
+            Returns the specified file bytes.
+            </summary>
+            <param name="bucketName">
+            The bucket that should contain the file specified.
+            </param>
+            <param name="keyName">
+            The file key name.
+            </param>
+            <returns>
+            Byte array, containing the specified file's bytes.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.IO.AmazonFileManagment.AmazonS3FileManager.RemoveFileByUrlAsync(System.String,System.String)">
+            <summary>
+            Removes a specified file from an Amazon S3 bucket.
+            </summary>
+            <param name="bucketName">
+            The bucket that should be the file removed from.
+            </param>
+            <param name="fileUrl">
+            The url of the file that should be removed.
+            </param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.IO.AmazonFileManagment.AmazonS3FileManager.RemoveFileAsync(System.String,System.String)">
+            <summary>
+            Removes a specified file from an Amazon S3 bucket.
+            </summary>
+            <param name="bucketName">
+            The bucket that should be the file removed from.
+            </param>
+            <param name="keyName">
+            The url of the file that should be removed.
+            </param>
+            <returns>
+            The System.Threading.Tasks.Task that represents the asynchronous operation.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.IO.AmazonFileManagement.DependencyInjection.ServiceCollectionExtensions.AddAmazonS3FileManagement(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds Amazon S3 servicesas well as default implementation 
+            of MSToolKit.IO.AmazonFileManagment.Abstraction.IAmazonS3FileManager.
+            </summary>
+            <param name="services">
+            The service collection, that will service provider be built from.
+            </param>
+            <returns>
+            The same instane of Microsoft.Extensions.DependencyInjection.IServiceCollection with filled authentication services.
+            </returns>
+        </member>
+    </members>
+</doc>

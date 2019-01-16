@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MSToolKit.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:MSToolKit.Extensions.CollectionExtensions">
+            <summary>
+            Provides extension methods for using over collections.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Extensions.CollectionExtensions.IsEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Return false if the collection is empty. Otherwise returns true.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Extensions.CollectionExtensions.SelectAsync``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Threading.Tasks.Task{``1}})">
+            <summary>
+            Projects in parallel each element of a sequence into a new form.
+            </summary>
+            <typeparam name="TSource">The type of elements to invoke a transform function on.</typeparam>
+            <typeparam name="TDestination">The type of elements resturned by selector.</typeparam>
+            <param name="source">A sequence of values to invoke a transform function on.</param>
+            <param name="action">A transform function to apply to each element.</param>
+            <returns>
+            A sequence whose elements are the result of invoking the transform function on each element of source.
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Extensions.CollectionExtensions.ContainsFew``1(System.Collections.Generic.IEnumerable{``0},System.Int32,``0[])">
+            <summary>
+            Returns true or false depending of that the given collection contains at least 
+            as many passed elements as the number given such first parameter.
+            </summary>
+            <typeparam name="T">IComparable object type.</typeparam>
+            <param name="collection">The collection to be checked for.</param>
+            <param name="count">Minimum count of occurences.</param>
+            <param name="args">The elements to check for.</param>
+            <returns>True or False, depending on the result.</returns>
+        </member>
+        <member name="M:MSToolKit.Extensions.CollectionExtensions.ContainsAll``1(System.Collections.Generic.IEnumerable{``0},``0[])">
+            <summary>
+            Returns true or false depending of that the given collection contains all the passed arguments.
+            </summary>
+            <typeparam name="T">IComparable object type.</typeparam>
+            <param name="collection">The collection to be checked for.</param>
+            <param name="args">The elements to check for.</param>
+            <returns>True or False, depending on the result.</returns>
+        </member>
+        <member name="M:MSToolKit.Extensions.CollectionExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            Allows all collections, that implement IEnumerable to use ForEach with lambda expression. 
+            </summary>
+            <typeparam name="T">The generic type.</typeparam>
+            <param name="collection">The collection, that should be enumerated.</param>
+            <param name="action">
+            Action delegate that should be performed to the each element of the given collection.
+            </param>
+            <returns>The modified collection.</returns>
+        </member>
+        <member name="M:MSToolKit.Extensions.CollectionExtensions.ToQueue``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Returns new instance of Queue with all elements from the given collection.
+            </summary>
+            <typeparam name="T">The generic type.</typeparam>
+            <param name="collection">The source collection.</param>
+            <returns>System.Collections.Generic.Queue</returns>
+        </member>
+        <member name="M:MSToolKit.Extensions.CollectionExtensions.ToStack``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Returns new instance of Stack with all elements from the given collection.
+            </summary>
+            <typeparam name="T">The generic type.</typeparam>
+            <param name="collection">The source collection.</param>
+            <returns>System.Collections.Generic.Stack</returns>
+        </member>
+        <member name="T:MSToolKit.Extensions.DistributedCacheExtensions">
+            <summary>
+            Provides extension methods for using 
+            over Microsoft.Extensions.Caching.Distributed.IDistributedCache.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Extensions.DistributedCacheExtensions.SetSerializableObject(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.Object,System.TimeSpan)">
+            <summary>
+            Sets a specified key and value(serialized to JSON) to the application cache.
+            </summary>
+            <param name="cache">The provided instance of IDistributedCache.</param>
+            <param name="key">The key, that should be stored in the cache.</param>
+            <param name="value">The value for the given key, that should be stored in the cache.</param>
+            <param name="expiration">The expiration period of the currently stored KeyValuePair.</param>
+            <returns>
+            Microsoft.Extensions.Caching.Distributed.IDistributedCache
+            </returns>
+        </member>
+        <member name="M:MSToolKit.Extensions.DistributedCacheExtensions.GetSerializableObject``1(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String)">
+            <summary>
+            Gets a specified object from the cache by a given key.
+            </summary>
+            <typeparam name="T">Type of specified serializeable object.</typeparam>
+            <param name="cache">The provided instance of IDistributedCache.</param>
+            <param name="key">The key, that should be search for in the cache.</param>
+            <returns>
+            An instance of T, if found any for the given key.
+            </returns>
+        </member>
+        <member name="T:MSToolKit.Extensions.HttpStatusCodeExtensions">
+            <summary>
+            Provides extension metods to use over HttpStatusCodes.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Extensions.HttpStatusCodeExtensions.IsSuccessfull(System.Net.HttpStatusCode)">
+            <summary>
+            Checks if the specified status code is successfull or not.
+            </summary>
+            <param name="statusCode">The specified status code.</param>
+            <returns>True or false, depending of the invokation result.</returns>
+        </member>
+        <member name="T:MSToolKit.Extensions.QueryableExtensions">
+            <summary>
+            Provides extension methods for using over System.Linq.IQueryable.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Extensions.QueryableExtensions.OrderByMember``1(System.Linq.IQueryable{``0},System.String)">
+            <summary>
+            Sort the given queriable collection in ascending order by a specified member.
+            </summary>
+            <typeparam name="T">The generic type of the collection.</typeparam>
+            <param name="source">The source queryable collection.</param>
+            <param name="member">The specified member to order by.</param>
+            <returns>The sorted source as System.Linq.IOrderedQueryable.</returns>
+        </member>
+        <member name="M:MSToolKit.Extensions.QueryableExtensions.OrderByMemberDescending``1(System.Linq.IQueryable{``0},System.String)">
+            <summary>
+            Sort the given queriable collection in descending order by a specified member.
+            </summary>
+            <typeparam name="T">The generic type of the collection.</typeparam>
+            <param name="source">The source queryable collection.</param>
+            <param name="member">The specified member to order by.</param>
+            <returns>The sorted source as System.Linq.IOrderedQueryable.</returns>
+        </member>
+        <member name="M:MSToolKit.Extensions.QueryableExtensions.ThenByMember``1(System.Linq.IOrderedQueryable{``0},System.String)">
+            <summary>
+            Sort the given sorted queriable collection in ascending order by a specified member as next order member.
+            </summary>
+            <typeparam name="T">The generic type of the collection.</typeparam>
+            <param name="source">The source ordered queryable collection.</param>
+            <param name="member">The specified member to order by.</param>
+            <returns>The sorted source as System.Linq.IOrderedQueryable.</returns>
+        </member>
+        <member name="M:MSToolKit.Extensions.QueryableExtensions.ThenByMemberDescending``1(System.Linq.IOrderedQueryable{``0},System.String)">
+            <summary>
+            Sort the given sorted queriable collection in descending order by a specified member as next order member.
+            </summary>
+            <typeparam name="T">The generic type of the collection.</typeparam>
+            <param name="source">The source ordered queryable collection.</param>
+            <param name="member">The specified member to order by.</param>
+            <returns>The sorted source as System.Linq.IOrderedQueryable.</returns>
+        </member>
+        <member name="M:MSToolKit.Extensions.ServiceCollectionExtensions.AddConvetionallyNamedServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Reflection.Assembly)">
+            <summary>
+            Adds all services that match the following name convention: 
+            [Interface name = I{serviceName}, Implementation name = {serviceName}] to the service provider.
+            </summary>
+            <param name="assembly">The assembly, that services are located.</param>
+            <returns>The updated IServiceCollection.</returns>
+        </member>
+        <member name="T:MSToolKit.Extensions.TypeExtensions">
+            <summary>
+            Provides extension methods for using over System.Type class.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.Extensions.TypeExtensions.HasProperty(System.Type,System.String)">
+            <summary>
+            Checks if the given Type has a public property with the specified name.
+            </summary>
+            <param name="type">The given Type to be checked.</param>
+            <param name="propertyName">The specified property name to seach for.</param>
+            <returns>True or false, depending on the invokation result.</returns>
+        </member>
+        <member name="M:MSToolKit.Extensions.TypeExtensions.HasPropertyOfType``1(System.Type,System.String)">
+            <summary>
+            Checks if the given Type has a public property with the specified name and type.
+            </summary>
+            <typeparam name="T">The generic argument, that represents the property type to check for.</typeparam>
+            <param name="type">The given Type to be checked.</param>
+            <param name="propertyName">The specified property name to seach for.</param>
+            <returns>True or false, depending on the invokation result.</returns>
+        </member>
+        <member name="M:MSToolKit.Extensions.TypeExtensions.HasPropertyOfType(System.Type,System.Type,System.String)">
+            <summary>
+            Checks if the given Type has a public property of a specified type with a specified name.
+            </summary>
+            <param name="type">The given Type to be checked.</param>
+            <param name="propertyValueType">The type, that represents the property type to check for.</param>
+            <param name="propertyName">The specified property name to seach for.</param>
+            <returns>True or false, depending on the invokation result.</returns>
+        </member>
+    </members>
+</doc>

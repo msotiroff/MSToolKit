@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\PROJECTS\C#.NET\MSToolKit\source\1.0\MSToolKit.Validation\MSToolKit.Validation_Documentation.xml</DocumentationFile>
+    <OutputPath></OutputPath>
+  </PropertyGroup>
+
 </Project>

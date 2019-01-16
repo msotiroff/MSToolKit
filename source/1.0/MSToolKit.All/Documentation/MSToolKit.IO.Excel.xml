@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MSToolKit.IO.Excel</name>
+    </assembly>
+    <members>
+        <member name="T:MSToolKit.IO.Excel.Abstraction.IExcelBuilder">
+            <summary>
+            Provides an abstraction for building excel worksheets.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.IO.Excel.Abstraction.IExcelBuilder.BuildExcelWorksheet``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            Builds an excel worksheet and returns its bytes.
+            </summary>
+            <typeparam name="TSource">The type, that should be represented in the worksheet.</typeparam>
+            <param name="source">The collection of elements, to be inserted in the worksheet.</param>
+            <param name="sheetName">(optional) The name of the sheet to build.</param>
+            <returns>The built worksheet's bytes.</returns>
+        </member>
+        <member name="M:MSToolKit.IO.Excel.Abstraction.IExcelBuilder.BuildComplexExcelWorksheet(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{System.Object}},System.String)">
+            <summary>
+            Builds an excel worksheet and returns its bytes.
+            </summary>
+            <param name="multiCollections">
+            The collections of different elements, to be inserted in the worksheet.
+            </param>
+            <param name="sheetName">
+            (optional) The name of the sheet to build.
+            </param>
+            <returns>The built worksheet's bytes.</returns>
+        </member>
+        <member name="T:MSToolKit.IO.Excel.Attributes.ExcelDisplayNameAttribute">
+            <summary>
+            Adds a metadata to a property, that should be used for building an excel worksheet.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.IO.Excel.Attributes.ExcelDisplayNameAttribute.#ctor(System.String)">
+            <summary>
+            Initialize a new instance of MSToolKit.IO.Excel.Attributes.ExcelDisplayNameAttribute.
+            </summary>
+            <param name="name">The display name of the property, that has the current attribute.</param>
+        </member>
+        <member name="P:MSToolKit.IO.Excel.Attributes.ExcelDisplayNameAttribute.Name">
+            <summary>
+            Gets the display name for the property, that should be used in an excel worksheet.
+            </summary>
+        </member>
+        <member name="T:MSToolKit.IO.Excel.Attributes.ExcelIgnoreAttribute">
+            <summary>
+            Adds a metadata to a property, indicating that the current member
+            should be IGNORED when building an excel worksheet.
+            </summary>
+        </member>
+        <member name="T:MSToolKit.IO.Excel.Attributes.ExcelValueFormatAttribute">
+            <summary>
+            Adds a metadata to a property, that should be used for building an excel worksheet.
+            The member, that use this Attribute should implement System.IFormattable interface.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.IO.Excel.Attributes.ExcelValueFormatAttribute.#ctor(System.String)">
+            <summary>
+            Initialize a new instance of MSToolKit.IO.Excel.Attributes.ExcelValueFormatAttribute.
+            </summary>
+            <param name="format">
+            The format, which will be used for formatting the member value.
+            </param>
+        </member>
+        <member name="P:MSToolKit.IO.Excel.Attributes.ExcelValueFormatAttribute.Format">
+            <summary>
+            Gets the specified format for the member, which value should be formatted.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.IO.Excel.DependencyInjection.ServiceCollectionExtensions.AddExcelServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds a default instance for MSToolKit.IO.Excel.Abstraction.IExcelGenerator to the service provider.
+            </summary>
+            <param name="services">The service collection, that will service provider be built from.</param>
+            <returns>
+            The same instane of Microsoft.Extensions.DependencyInjection.IServiceCollection with filled excel services.
+            </returns>
+        </member>
+        <member name="T:MSToolKit.IO.Excel.ExcelBuilder">
+            <summary>
+            Provides a default implementation for MSToolKit.IO.Excel.Abstraction.IExcelBuilder.
+            </summary>
+        </member>
+        <member name="M:MSToolKit.IO.Excel.ExcelBuilder.BuildExcelWorksheet``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            Builds an excel worksheet and returns its bytes.
+            </summary>
+            <typeparam name="TSource">The type, that should be represented in the worksheet.</typeparam>
+            <param name="source">The collection of elements, to be inserted in the worksheet.</param>
+            <param name="sheetName">(optional) The name of the sheet to build.</param>
+            <returns>The built worksheet's bytes.</returns>
+        </member>
+        <member name="M:MSToolKit.IO.Excel.ExcelBuilder.BuildComplexExcelWorksheet(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{System.Object}},System.String)">
+            <summary>
+            Builds an excel worksheet and returns its bytes.
+            </summary>
+            <param name="multiCollections">
+            The collections of different elements, to be inserted in the worksheet.
+            </param>
+            <param name="sheetName">
+            (optional) The name of the sheet to build.
+            </param>
+            <returns>The built worksheet's bytes.</returns>
+        </member>
+    </members>
+</doc>
